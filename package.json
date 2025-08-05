@@ -18,6 +18,9 @@
     "prisma": {
     "seed": "tsx prisma/seed.ts"
   },
+  "engines": {
+    "node": "20.17.0"
+  },
   "dependencies": {
     "next": "14.0.0",
     "react": "^18.2.0",
