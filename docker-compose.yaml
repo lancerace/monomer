@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  postgresdb:
+    image: postgres
+    container_name: monomer-postgres-db
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+      POSTGRES_DB: monomer
+    ports: 
+        - '5433:5432'
+    volumes:
+        - postgresdb:/var/lib/postgresql/data
+volumes:
+  postgresdb:
+

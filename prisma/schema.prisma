@@ -1,0 +1,34 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Microplate {
+  id           String          @id @default(cuid())
+  name         String
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  measurements WellMeasurement[]
+
+  @@map("microplates")
+}
+
+model WellMeasurement {
+  id                  String     @id @default(cuid())
+  microplateId        String
+  row                 String     // 'A' or 'B'
+  column              Int        // 1, 2, or 3
+  confluencyPercentage Float
+  timestamp           DateTime   @default(now())
+  microplate          Microplate @relation(fields: [microplateId], references: [id], onDelete: Cascade)
+
+  @@unique([microplateId, row, column, timestamp])
+  @@map("well_measurements")
+}

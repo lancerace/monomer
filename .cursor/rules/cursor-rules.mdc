@@ -1,0 +1,220 @@
+---
+description: "General coding rules and guidelines for the Nightlife project"
+alwaysApply: false
+---
+# Cursor Rules for Nightlife Project
+
+## General Coding Standards
+
+### TypeScript/JavaScript
+- Use TypeScript for all new code
+- Prefer explicit typing over `any`
+- Use interfaces for object shapes
+- Use enums for constants
+- Always use strict mode
+
+### React/Next.js
+- Use functional components with hooks
+- Prefer `'use client'` directive for client components
+- Use proper TypeScript interfaces for props
+- Implement proper error boundaries
+- Use Next.js App Router patterns
+
+### File Organization
+- Group related files in feature folders
+- Use index files for clean imports
+- Separate UI components from business logic
+- Use consistent file naming conventions
+
+### Performance
+- Fast Core Web Vitals
+- Implement proper dependency arrays in useEffect
+- Use lazy loading for large components
+- Optimize images and assets
+
+### Accessibility
+- Use semantic HTML elements
+- Include proper ARIA labels
+- Ensure keyboard navigation works
+- Maintain proper color contrast ratios
+
+### Error Handling
+- Use try-catch blocks for async operations
+- Implement proper error boundaries
+- Provide meaningful error messages
+- Log errors appropriately
+
+### Security
+- Validate all user inputs
+- Sanitize data before rendering
+- Use environment variables for secrets
+- Implement proper authentication checks
+
+### Database/Prisma
+- Use Prisma for database operations
+- Write type-safe queries
+- Handle database errors gracefully
+- Use transactions for complex operations
+
+### Styling
+- Use Tailwind CSS for styling
+- Follow mobile-first responsive design
+- Use consistent spacing and typography
+- Maintain design system consistency
+
+### Git
+- Write descriptive commit messages
+- Use conventional commit format
+- Keep commits atomic and focused
+- Review code before merging
+
+## Specific Project Rules
+
+### Component Structure
+```typescript
+// Preferred component structure
+interface ComponentProps {
+  // Props interface
+}
+
+const Component: React.FC<ComponentProps> = ({ prop1, prop2 }) => {
+  // Hooks at the top
+  const [state, setState] = useState();
+  
+  // Event handlers
+  const handleClick = () => {
+    // Implementation
+  };
+  
+  // Render
+  return (
+    <div>
+      {/* JSX */}
+    </div>
+  );
+};
+
+export default Component;
+```
+
+### Custom Hook Structure
+```typescript
+// Preferred custom hook structure using action/getter pattern
+interface HookParams {
+  // Hook parameters interface
+}
+
+const useCustomHook = (params: HookParams) => {
+  // State and other hooks at the top
+  const [state, setState] = useState();
+  const [loading, setLoading] = useState(false);
+  
+  // Form or validation logic (if applicable)
+  const methods = useForm({
+    // form configuration
+  });
+  
+  // Computed values and derived state
+  const computedValue = useMemo(() => {
+    // computation logic
+  }, [dependencies]);
+  
+  // Event handlers and actions
+  const handleAction = useCallback(() => {
+    // action implementation
+  }, [dependencies]);
+  
+  // Group return values into getters and actions
+  const getters = {
+    // Read-only values, state, computed values
+    state,
+    loading,
+    computedValue,
+    errors: methods?.formState?.errors,
+    // Any other getter values
+  };
+  
+  const actions = {
+    // Functions that modify state or trigger side effects
+    setState,
+    setLoading,
+    handleAction,
+    handleSubmit: methods?.handleSubmit,
+    // Any other action functions
+  };
+  
+  return { getters, actions };
+};
+
+export default useCustomHook;
+```
+
+**Hook Guidelines:**
+- Always return `{ getters, actions }` object structure
+- `getters`: Read-only values, state, computed values, form state
+- `actions`: Functions that modify state, event handlers, form actions
+- Use meaningful names for both getters and actions
+- Keep hooks focused on a single responsibility
+- Use TypeScript interfaces for hook parameters and return types
+- Include proper error handling and loading states
+
+### API Routes
+```typescript
+// API route structure
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function GET(request: NextRequest) {
+  try {
+    // Implementation
+    return NextResponse.json({ data });
+  } catch (error) {
+    return NextResponse.json({ error: 'Message' }, { status: 500 });
+  }
+}
+```
+
+### Database Operations
+```typescript
+// Prisma operations
+import { prisma } from '@/services/prisma';
+
+export async function createUser(data: CreateUserInput) {
+  try {
+    return await prisma.user.create({
+      data,
+      select: {
+        id: true,
+        email: true,
+        // Select only needed fields
+      }
+    });
+  } catch (error) {
+    // Handle specific Prisma errors
+    throw new Error('Failed to create user');
+  }
+}
+```
+
+## Common Patterns to Avoid
+
+- Don't use `any` type unless absolutely necessary
+- Don't mutate props or state directly
+- Don't use inline styles
+- Don't forget error handling
+- Don't ignore TypeScript errors
+- Don't use console.log in production
+- Don't commit sensitive data
+- Don't use deprecated APIs
+
+## Best Practices
+
+- Write self-documenting code
+- Use meaningful variable names
+- Keep functions small and focused
+- Add comments for complex logic
+- Follow DRY principle
+- Use proper TypeScript features
+- Implement proper loading states
+- Handle edge cases
+- Write defensive code
+- Use proper error boundaries
