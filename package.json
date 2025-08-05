@@ -1,6 +1,6 @@
 {
   "name": "culture-confluency-tracker",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "postinstall": "prisma generate",
@@ -15,7 +15,7 @@
     "db:seed": "tsx prisma/seed.ts",
     "db:studio": "prisma studio"
   },
-    "prisma": {
+  "prisma": {
     "seed": "tsx prisma/seed.ts"
   },
   "engines": {
