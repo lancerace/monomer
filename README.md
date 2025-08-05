@@ -32,33 +32,36 @@ Accessible via https://monomer.vercel.app/
    ```
 
 2. **Set up PostgreSQL database:**
-   - Install PostgreSQL locally or use a cloud provider
+   - Install PostgreSQL locally using ```docker compose up -d``` or use a db cloud provider such as supabase.
    - Create a new database for the application
 
 3. **Set up environment variables:**
    Create a `.env` file in the root directory:
-   ```
-   DATABASE_URL="postgresql://username:password@localhost:5432/culture_tracker"
-   ```
-   Replace the connection string with your actual PostgreSQL credentials.
 
-4. **Initialize the database:**
+   For Local db, add the following
+   ```
+   DATABASE_URL="postgresql://root:root@localhost:5433/monomer"
+   ```
+
+   Or replace the connection string with your actual PostgreSQL credentials if you are using live database.
+
+5. **Initialize the database:**
    ```bash
    npx prisma generate
    npx prisma migrate dev --name init
    ```
 
-5. **Seed the database with sample data:**
+6. **Seed the database with sample data:**
    ```bash
    npm run db:seed
    ```
 
-6. **Start the development server:**
+7. **Start the development server:**
    ```bash
    npm run dev
    ```
 
-7. **Access the application:**
+8. **Access the application:**
    Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Usage
