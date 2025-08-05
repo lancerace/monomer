@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import type { Microplate } from '@prisma/client';
-import MeasurementForm from './Measurement';
+import MeasurementForm from './measurement';
 
 async function getMicroplate(id: string): Promise<Microplate | null> {
   try {
