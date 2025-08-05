@@ -1,6 +1,7 @@
 # Culture Confluency Tracker
 
 A full-stack Next.js application designed to help scientists efficiently track and visualize cell confluency on microplates.
+Accessible via https://monomer.vercel.app/
 
 ## Features
 
