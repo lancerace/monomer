@@ -36,14 +36,16 @@ const addMeasurement = async ({
 export function useAddMeasurement(plateId: string) {
     const router = useRouter();
   
-    // Mutation hook
-    const mutation = useMutation({
-      mutationFn: addMeasurement,
-      onSuccess: () => {
-        // Navigate back to the microplate view after successful submission
+  // Mutation hook
+  const mutation = useMutation({
+    mutationFn: addMeasurement,
+    onSuccess: () => {
+      setTimeout(() => {
         router.push(`/microplate/${plateId}`);
-      },
-    });
+        router.refresh();
+      }, 2000);
+    },
+  });
   
     // Event handlers and actions
     const handleAddMeasurement = useCallback(async (input: AddMeasurementInput) => {
